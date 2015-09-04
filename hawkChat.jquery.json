@@ -1,0 +1,28 @@
+{
+  "name": "hawkChat",
+  "version": "0.0.1",
+  "title":  "Hawk Chat",
+  "description": "Chat on service Post Hawk",
+  "author": {
+    "name": "Barulin Maxim",
+    "url": "https://bitbucket.org/Slavenin/hawk_chat"
+  },
+  "maintainers": [
+    {
+      "name": "Barulin Maxim",
+      "url": "https://bitbucket.org/Slavenin/"
+    }
+  ],
+  "licenses": [
+    {
+      "type": "GPL",
+      "url": "https://github.com/Slavenin/state_form/blob/master/LICENSE"
+    }
+  ],
+  "dependencies": {
+    "jquery": ">=1.7"
+  },
+  "bugs": "https://bitbucket.org/Slavenin/hawk_chat/issues",
+  "homepage": "http://api.post-hawk.com/добавить-чат/",
+  "docs": "http://api.post-hawk.com/добавить-чат/"
+}
