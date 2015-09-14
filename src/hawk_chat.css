@@ -109,9 +109,21 @@
 	padding-left: 20px;
 }
 
+.chat-online-u{
+	display: block;
+	height: 50%;
+	overflow-y: scroll;
+}
+
 .chat-offline{
 	color: #ff0000;
 	padding-left: 20px;
+}
+
+.chat-offline-u{
+	display: block;
+	height: 30%;
+	overflow-y: scroll;
 }
 
 .chat-current{
