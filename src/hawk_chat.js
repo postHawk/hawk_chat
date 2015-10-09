@@ -69,7 +69,7 @@
 				}
 				else
 				{
-					console.error('Для перемещаемого чата необходимо наличие jquery ui draggable')
+					console.error('Для перемещаемого чата необходимо наличие jquery ui draggable');
 				}
 			}
 
@@ -477,7 +477,7 @@
 
 				//формируем строку для вставки в чат
 				//@todo доработать, чтобы было как при входящем сообщении
-				//сделать callback 
+				//сделать callback
 				var str = settings
 						.outMessageFormat
 						.replace('{time}', time)
@@ -506,7 +506,7 @@
 
 				var tab = settings.container.find(settings.tabSelector + '.active');
 				var to = tab.attr('data-href').replace('_panel', '');
-				
+
 				if(tab.data().isGroup)
 				{
 					to = {group: [to]};
@@ -565,7 +565,7 @@
 			var tabs = container.find(settings.tabsContainerSelector);
 			isGroup = isGroup || false;
 			isMain = isMain || false;
-			
+
 			//проверяем наличие вкладки, если она уже есть,
 			//то просто активируем её
 			var tab = tabs.find('[data-href="' + id + '_panel' + '"]');
