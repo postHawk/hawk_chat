@@ -68,7 +68,7 @@
     vertical-align: top;
     max-height: 100%;
     position: relative;
-    padding-top: 20px;
+    padding-top: 50px;
     padding-bottom: 60px;
 }
 
@@ -164,7 +164,7 @@
 
 .chat-tabs{
 	height: 50px;
-    width: 498px;
+    width: 100%;
     position: absolute;
     top: 0;
 }
