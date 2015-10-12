@@ -1,4 +1,8 @@
 (function ($) {
+	var users = {
+		online: [],
+		offline: []
+	};
 	var methods = {
 		/**
 		 * Инициализация плагина
@@ -296,6 +300,8 @@
 				}
 
 				//пользователи приходят в формате название_группы =>[пользователи]
+				users.online = [];
+				users.offline = [];
 				msg.result.forEach(function (record) {
 					for(var gname in record)
 					{
@@ -334,6 +340,15 @@
 								}
 
 								container.append(html);
+							}
+
+							if(user.online)
+							{
+								users.online.push(user.user);
+							}
+							else
+							{
+								users.offline.push(user.user);
 							}
 						});
 					}
@@ -417,7 +432,7 @@
 				else
 				{
 					var gname = prompt("Придумайте название группы \r\n(допускаются символы латинского алфавита и \"_\"):");
-					if(gname.trim() !== '' && HAWK_API.check_user_id(gname))
+					if(gname && gname.trim() !== '' && HAWK_API.check_user_id(gname))
 					{
 						//добавляем самого пользователя в группу
 						HAWK_API.add_user_to_group([gname]);
@@ -454,6 +469,13 @@
 				$(settings.createGroupButtonSelector).show();
 				$(settings.groupActionsWrapperSelector).hide();
 			});
+		},
+		/**
+		* Возвращает список пользователей
+		* @returns {Object}
+		*/
+		getUsers: function() {
+			return users;
 		},
 		/**
 		 * Отправка сообщения
@@ -711,20 +733,18 @@
 			return '<div class="chat-container"> \
 				<div id="" class="chat-header"> \
 					<div class="chat-title">Post Hawk Chat</div> \
-					<div class="chat-logo"> \
-						<img> \
-					</div> \
+					<div class="chat-logo"></div> \
 				</div> \
 				<div class="chat-body"> \
 					<div class="chat-left-panel"> \
 						<div class="chat-separator">\
 							<span>Группы</span>\
 							<span id="create_new_group">\
-								<img class="add-hawk-group">\
+								<div class="add-hawk-group"></div> \
 							</span>\
 							<span id="actions_new_group">\
-								<img class="add-hawk-group-confirm">\
-								<img class="add-hawk-group-dismiss">\
+								<div class="add-hawk-group-confirm"></div> \
+								<div class="add-hawk-group-dismiss"></div> \
 							</span>\
 						</div> \
 						<div class="chat-groups-u" id="chat_groups_u"><table class="chat-users"></table></div> \
@@ -776,7 +796,7 @@
 		 * @returns {String}
 		 */
 		getDefaultGroupFormat: function () {
-			return '<tr data-hawk-id="{id}"><td>{login}</td><td><img data-hawk-id="{id}" class="add-hawk-group-dismiss"></td></tr>';
+			return '<tr data-hawk-id="{id}"><td>{login}</td><td><div data-hawk-id="{id}" class="add-hawk-group-dismiss"></div></td></tr>';
 		},
 		/**
 		 * Устанавливает заголовок главного таба
