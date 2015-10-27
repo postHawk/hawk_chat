@@ -88,7 +88,8 @@
 			[
 				{selector: settings.tabsWrapperSelector, axis: 'x'},
 				{selector: settings.onlineWrapperSelector, axis: 'xy'},
-				{selector: settings.offlineWrapperSelector, axis: 'xy'}
+				{selector: settings.offlineWrapperSelector, axis: 'xy'},
+				{selector: settings.groupsWrapperSelector, axis: 'xy'}
 			].forEach(methods.applyStyleToScroll);
 
 		},
@@ -302,11 +303,11 @@
 				//пользователи приходят в формате название_группы =>[пользователи]
 				users.online = [];
 				users.offline = [];
+				var container = settings.onlineWrapperSelector + ' ' + settings.usersContainerSelector;
 				msg.result.forEach(function (record) {
 					for(var gname in record)
 					{
 						record[gname].users.forEach(function (user) {
-							var container = settings.onlineWrapperSelector + ' ' + settings.usersContainerSelector;
 
 							var u_class = settings.onlineUserClass;
 							if (!user.online && user.user != HAWK_API.get_user_id())
@@ -365,9 +366,8 @@
 			$(settings.groupsWrapperSelector + ' ' + settings.usersContainerSelector).empty();
 			var groups = [];
 			//показываем список групп пользователя
+			var container = $(settings.groupsWrapperSelector + ' ' + settings.usersContainerSelector);
 			msg.result.forEach(function (group) {
-				var container = settings.groupsWrapperSelector + ' ' + settings.usersContainerSelector;
-
 				//собираем строку группы
 				var html = settings
 						.groupFormat
@@ -380,13 +380,24 @@
 
 				html.find(settings.exitGroupButtonSelector).click(methods.exitFromGroup)
 
-				$(container).append(html);
+				container.append(html);
 
 				groups.push(group.name);
 			});
 
+			if(groups.length)
+			{
 			//отправляем запрос за пользователями в полученных группах
-			HAWK_API.get_users_by_group(groups);
+				HAWK_API.get_users_by_group(groups);
+			}
+			else
+			{
+				$(settings.onlineWrapperSelector + ' ' + settings.usersContainerSelector)
+						.find(settings.onlineUserClass)
+						.not(settings.currentUserClass)
+						.parents('[data-hawk-id]')
+						.remove();
+			}
 		},
 		/**
 		 * Выход пользователя из группы
