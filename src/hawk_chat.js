@@ -317,6 +317,7 @@
 							}
 							else if(user.user === HAWK_API.get_user_id())
 							{
+								container = settings.onlineWrapperSelector + ' ' + settings.usersContainerSelector;
 								u_class = settings.currentUserClass;
 							}
 
